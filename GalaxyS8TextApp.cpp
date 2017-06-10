@@ -22,5 +22,5 @@ void GalaxyS8TextApp::Open() {
 }
 
 void GalaxyS8TextApp::Close() {
-	std::cout << "Closing Galaxy S8 Text App.\n";
+	std::cout << "Closing Galaxy S8 Text App.\n\n";
 }

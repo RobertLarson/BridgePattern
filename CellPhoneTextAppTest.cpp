@@ -6,24 +6,35 @@
  */
 
 #include "GalaxyS8TextApp.h"
+#include "IPhone8TextApp.h"
 #include "SprintPhoneTextAppImpl.h"
 #include "VerizonPhoneTextAppImpl.h"
+
+void SendText(CellPhoneTextApp & textApp)
+{
+	textApp.Open();
+
+	textApp.AddRecipient(std::string("555-123-4567"));
+	textApp.AddRecipient(std::string("555-765-4321"));
+
+	textApp.AddText(std::string("Can you hear me now?"));
+
+	textApp.SendText();
+
+	textApp.Close();
+}
 
 int main()
 {
 	SprintPhoneTextAppImpl sprintTextAppImpl;
 	GalaxyS8TextApp        galaxyS8TextApp(&sprintTextAppImpl);
 
-	galaxyS8TextApp.Open();
+	SendText(galaxyS8TextApp);
 
-	galaxyS8TextApp.AddRecipient(std::string("555-123-4567"));
-	galaxyS8TextApp.AddRecipient(std::string("555-765-4321"));
+	VerizonPhoneTextAppImpl verizonTextAppImpl;
+	IPhone8TextApp        iPhone8TextApp(&verizonTextAppImpl);
 
-	galaxyS8TextApp.AddText(std::string("Can you hear me now?"));
-
-	galaxyS8TextApp.SendText();
-
-	galaxyS8TextApp.Close();
+	SendText(iPhone8TextApp);
 
 	return 0;
 }
